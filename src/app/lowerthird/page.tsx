@@ -76,20 +76,14 @@ export default function LowerThirdTV() {
         }
       `}} />
 
-      {/* STATIC MASTER WRAPPER: 
-          No 'key' here means this div NEVER unmounts. 
-          The ATEM DSK will see a constant, non-flickering black box.
-      */}
+
       <div 
-        className="absolute bottom-[12%] flex items-end h-[105px] gap-0 overflow-visible edge-guard bg-black" 
-        style={{ right: '120px', width: '1600px' }}
+        className="absolute bottom-[12%] flex items-end h-[103px] gap-0 overflow-visible edge-guard bg-black" 
+        style={{ right: '120px', width: '1620px' }}
       >
-        {/* SOLID BLACK BASE */}
         <div className="absolute inset-0 bg-black z-0" />
 
-        {/* CITY INFO PANEL (Static Container) */}
         <div className="flex flex-col justify-end h-full shrink-0 z-10 bg-white border-l-[10px] border-[#84754D] min-w-[280px]">
-          {/* Internal Content (Animates when city changes) */}
           <div className="px-6 py-2 h-full flex flex-col justify-center relative overflow-hidden content-fade" key={`city-data-${city}`}>
             <p className="text-[9px] font-black text-zinc-400 uppercase tracking-[0.3em] mb-1">MAYOR RACE</p>
             <h1 className="text-[#84754D] text-3xl font-black italic uppercase tracking-tighter mb-2">{city}</h1>
@@ -103,7 +97,6 @@ export default function LowerThirdTV() {
           </div>
         </div>
 
-        {/* CANDIDATE GRID (Static Container) */}
         <div className="flex-1 flex h-full items-end gap-1 ml-1 z-10 bg-black overflow-visible relative">
           {displayList.map((can, i) => {
             const partyColor = PARTY_COLORS[can.party] || "#71717a";
