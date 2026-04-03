@@ -81,8 +81,8 @@ export default function LowerThirdTV() {
           The ATEM DSK will see a constant, non-flickering black box.
       */}
       <div 
-        className="absolute bottom-[11%] flex items-end h-[105px] gap-0 overflow-visible edge-guard bg-black" 
-        style={{ right: '100px', width: '1590px' }}
+        className="absolute bottom-[12%] flex items-end h-[105px] gap-0 overflow-visible edge-guard bg-black" 
+        style={{ right: '120px', width: '1600px' }}
       >
         {/* SOLID BLACK BASE */}
         <div className="absolute inset-0 bg-black z-0" />
