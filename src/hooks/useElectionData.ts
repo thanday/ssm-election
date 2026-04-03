@@ -16,10 +16,7 @@ export function useElectionData() {
   const [connected, setConnected] = useState(false);
 
   useEffect(() => {
-    // SMART LOGIC:
-    // 1. Check if we are in the browser.
-    // 2. Use the current window location's origin (IP or Domain).
-    // 3. This ensures it works on 192.168.1.244, localhost, or a real domain.
+
     const socketUrl = typeof window !== "undefined" ? window.location.origin : "";
 
     const socket = io(socketUrl, {
