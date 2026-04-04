@@ -48,7 +48,6 @@ export default function ReferendumBug() {
       {/* POSITIONED TOP-RIGHT */}
       <div className="absolute top-12 right-12 w-[380px] shadow-[0_30px_60px_rgba(0,0,0,0.9)] border-b-4 border-[#84754D] animate-fade-in overflow-hidden bg-black">
         
-        {/* BROADCAST SCANLINE OVERLAY */}
         <div className="absolute inset-0 pointer-events-none z-50 opacity-[0.03] scanline-pattern" />
 
         {/* 1. HEADER */}
@@ -62,14 +61,13 @@ export default function ReferendumBug() {
             </div>
         </div>
 
-        {/* 2. MAIN DATA BODY - NEW LAYOUT */}
+        {/* 2. MAIN DATA BODY */}
         <div className="bg-[#0a0a0a] p-6 border-x-2 border-zinc-900 relative overflow-hidden">
             
-            {/* GLASS SHINE ANIMATION */}
             <div className="absolute inset-0 w-full h-full animate-shine z-0 pointer-events-none opacity-10" 
                  style={{ background: 'linear-gradient(90deg, transparent, white, transparent)' }} />
 
-            {/* A. LABELS (Above Bar) */}
+            {/* A. LABELS */}
             <div className="flex justify-between items-end relative z-10 mb-2">
                 <span className="text-emerald-500 font-black text-4xl uppercase tracking-widest leading-none drop-shadow-[0_0_10px_rgba(16,185,129,0.3)]">
                     YES
@@ -80,7 +78,7 @@ export default function ReferendumBug() {
             </div>
 
             {/* B. BATTLE BAR */}
-            <div className="relative h-5 w-full bg-zinc-900 rounded-sm overflow-hidden border border-white/5 shadow-inner mb-4 z-10">
+            <div className="relative h-5 w-full bg-zinc-900 rounded-sm overflow-hidden border border-white/5 shadow-inner mb-6 z-10">
                 <div 
                     className="absolute left-0 top-0 h-full bg-emerald-500 transition-all duration-1000 ease-out shadow-[4px_0_10px_rgba(0,0,0,0.5)]" 
                     style={{ width: `${yesPct}%` }} 
@@ -89,46 +87,51 @@ export default function ReferendumBug() {
                     className="absolute right-0 top-0 h-full bg-red-600 transition-all duration-1000 ease-out shadow-[-4px_0_10px_rgba(0,0,0,0.5)]" 
                     style={{ width: `${noPct}%` }} 
                 />
-                {/* Center Marker */}
                 <div className="absolute left-1/2 top-0 w-[2px] h-full bg-white/20 z-10" />
             </div>
 
-            {/* C. PERCENTAGES & VOTES (Below Bar) */}
+            {/* C. PERCENTAGES & VOTES */}
             <div className="flex justify-between items-start relative z-10">
-                {/* YES PERCENT / VOTE */}
-                <div className="flex flex-col items-start">
-                    <div className="text-white text-5xl font-black italic tracking-tighter tabular-nums leading-none drop-shadow-lg">
+                {/* YES DATA */}
+                <div className="flex flex-col items-start min-w-0">
+                    <div className="text-white text-5xl font-black italic tracking-tighter tabular-nums leading-none">
                         <RollingNumber value={yesPct} decimals={1} /><span className="text-xl ml-0.5 opacity-30">%</span>
                     </div>
-                    <span className="text-zinc-500 text-[20px] font-bold tabular-nums mt-1">
-                        <RollingNumber value={data.yes} /> <span className="opacity-40 ml-1 text-[12px]">TOTAL VOTES</span>
-                    </span>
+                    <div className="mt-2 flex flex-col">
+                        <span className="text-zinc-600 text-[12px] font-black uppercase tracking-widest mb-0.5 whitespace-nowrap">Total Votes</span>
+                        <span className="text-zinc-400 text-xl font-bold tabular-nums leading-none">
+                            <RollingNumber value={data.yes} />
+                        </span>
+                    </div>
                 </div>
 
-                {/* NO PERCENT / VOTE */}
-                <div className="flex flex-col items-end text-right">
-                    <div className="text-white text-5xl font-black italic tracking-tighter tabular-nums leading-none drop-shadow-lg">
+                {/* NO DATA */}
+                <div className="flex flex-col items-end text-right min-w-0">
+                    <div className="text-white text-5xl font-black italic tracking-tighter tabular-nums leading-none">
                         <RollingNumber value={noPct} decimals={1} /><span className="text-xl ml-0.5 opacity-30">%</span>
                     </div>
-                    <span className="text-zinc-500 text-[20px] font-bold tabular-nums mt-1">
-                        <RollingNumber value={data.no} /> <span className="opacity-40 ml-1 text-[12px]">TOTAL VOTES</span>
-                    </span>
+                    <div className="mt-2 flex flex-col items-end">
+                        <span className="text-zinc-600 text-[12px] font-black uppercase tracking-widest mb-0.5 whitespace-nowrap">Total Votes</span>
+                        <span className="text-zinc-400 text-xl font-bold tabular-nums leading-none">
+                            <RollingNumber value={data.no} />
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        {/* 3. TURNOUT & BOXES FOOTER */}
+        {/* 3. FOOTER */}
         <div className="bg-[#050505] p-5 flex justify-between items-center border-x-2 border-zinc-900 border-t border-zinc-800 relative z-10">
             <div className="flex flex-col">
-                <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest leading-none mb-1">National Turnout</span>
+                <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest leading-none mb-1">Turnout</span>
                 <span className="text-emerald-400 font-black text-3xl italic tracking-tighter leading-none">
                     <RollingNumber value={data.turnout} decimals={2} />%
                 </span>
             </div>
             <div className="text-right border-l border-zinc-800 pl-5">
-                <span className="text-[13px] font-black text-zinc-500 uppercase tracking-widest leading-none mb-1">Boxes Reported</span>
-                <span className="text-white font-black text-[30px] italic tracking-tighter leading-none block">
-                    {data.boxesReported} <span className="text-[#84754D] not-italic text-[18px]">/ {data.totalBoxes}</span>
+                <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest leading-none mb-1">Boxes</span>
+                <span className="text-white font-black text-[28px] italic tracking-tighter leading-none block">
+                    {data.boxesReported} <span className="text-[#84754D] not-italic text-[16px]">/ {data.totalBoxes}</span>
                 </span>
             </div>
         </div>
@@ -144,12 +147,8 @@ export default function ReferendumBug() {
           20% { transform: translateX(300%) skewX(-30deg); }
           100% { transform: translateX(300%) skewX(-30deg); }
         }
-        .animate-fade-in {
-          animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        .animate-shine {
-          animation: shine 10s infinite ease-in-out;
-        }
+        .animate-fade-in { animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-shine { animation: shine 10s infinite ease-in-out; }
         .scanline-pattern {
           background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%);
           background-size: 100% 4px;
