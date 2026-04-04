@@ -1,3 +1,4 @@
+"use client";
 import { createServer, IncomingMessage, ServerResponse } from "http";
 import { parse } from "url";
 import next from "next";
@@ -25,7 +26,7 @@ app.prepare().then(async () => {
     handle(req, res, parsedUrl);
   });
 
-  // 2. Initialize Socket.IO (Renamed to SocketServer to avoid naming conflicts)
+  // 2. Initialize Socket.IO
   const io = new SocketServer(httpServer, {
     cors: { origin: "*", methods: ["GET", "POST"] },
     transports: ["websocket", "polling"],
@@ -43,8 +44,8 @@ app.prepare().then(async () => {
   const db = client.db("sstv_election");
   let isAutoFetchEnabled = true;
 
-  // --- REST OF YOUR FUNCTIONS (fetchExternalData, etc.) ---
-  // Ensure any 'require' inside functions are also removed if they exist.
+  // --- NEW: MAP STATE PERSISTENCE ---
+  let currentMapState: Record<string, string> = {}; 
 
   async function getAllElectionData() {
     try {
@@ -71,7 +72,6 @@ app.prepare().then(async () => {
           for (const can of city.candidates) {
             const sstvId = `mayor-${cityName}-${can.candidate_number}`.toLowerCase();
             
-            // --- BROADCAST OVERRIDES ---
             let finalName = can.full_name;
             if (sstvId === "mayor-male-1") finalName = "Ahmed Aiham";
             if (sstvId === "mayor-male-5") finalName = "Abdulla Mahzoom";
@@ -96,7 +96,6 @@ app.prepare().then(async () => {
         }
       }
 
-      // Referendum Sync
       const refRes = await axios.get("https://boduninmun-2026.sun.mv/data/referendum.json");
       const ref = refRes.data.referendum;
       if (ref) {
@@ -119,13 +118,31 @@ app.prepare().then(async () => {
 
   io.on("connection", async (socket: any) => {
     console.log("📺 Device Linked:", socket.id);
+    
     socket.emit("sync-data", await getAllElectionData());
+
+    socket.emit("init-map-state", currentMapState);
+
+    // Listen for the controller's click
+    socket.on("update-atoll-color", (data: { id: string, hex: string }) => {
+        currentMapState[data.id] = data.hex;
+        // Broadcast to EVERYONE (including the TV Out)
+        io.emit("map-color-changed", data);
+    });
+
+    socket.on("reset-atoll-map", () => {
+        currentMapState = {};
+        io.emit("map-reset-complete");
+    });
+
     socket.on("get-initial-data", async () => socket.emit("sync-data", await getAllElectionData()));
+    
     socket.on("toggle-auto-fetch", async (enabled: boolean) => {
       isAutoFetchEnabled = enabled;
       io.emit("auto-fetch-status", isAutoFetchEnabled);
       if (enabled) fetchExternalData();
     });
+
     socket.on("disconnect", () => console.log("❌ Device Unlinked"));
   });
 
