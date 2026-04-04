@@ -68,7 +68,6 @@ export default function LowerThirdTV() {
         .edge-guard { box-shadow: 0 0 0 2px #000000; outline: 2px solid #000000; }
       `}} />
 
-      {/* MASTER BAR: Width increased to 1650px and Left pushed to 80px */}
       <div 
         className="absolute bottom-[10%] left-[80px] flex items-end h-[100px] gap-0 overflow-visible edge-guard bg-black" 
         style={{ width: '1650px' }} 
@@ -76,7 +75,7 @@ export default function LowerThirdTV() {
         <div className="absolute inset-0 bg-black z-0" />
 
         {/* CITY INFO PANEL */}
-        <div className="flex flex-col justify-end h-full shrink-0 z-50 bg-white border-l-[10px] border-[#84754D] w-[240px]">
+        <div className="flex flex-col justify-end h-full shrink-0 z-50 bg-white border-l-[10px] border-[#84754D] w-[230px]">
           <div className="px-4 py-2 h-full flex flex-col justify-center relative overflow-hidden content-fade" key={`city-data-${city}`}>
             <p className="text-[9px] font-black text-zinc-400 uppercase tracking-[0.2em] mb-0.5">MAYOR RACE</p>
             <h1 className="text-[#84754D] text-xl font-black italic uppercase tracking-tighter mb-1 leading-none">{city}</h1>
