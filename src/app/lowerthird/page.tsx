@@ -68,10 +68,10 @@ export default function LowerThirdTV() {
         .edge-guard { box-shadow: 0 0 0 2px #000000; outline: 2px solid #000000; }
       `}} />
 
-      {/* MASTER BAR: Offset to clear SSTV Bug */}
+      {/* MASTER BAR: Width increased to 1650px and Left pushed to 80px */}
       <div 
-        className="absolute bottom-[10%] left-[180px] flex items-end h-[100px] gap-0 overflow-visible edge-guard bg-black" 
-        style={{ width: '1550px' }} 
+        className="absolute bottom-[10%] left-[80px] flex items-end h-[100px] gap-0 overflow-visible edge-guard bg-black" 
+        style={{ width: '1650px' }} 
       >
         <div className="absolute inset-0 bg-black z-0" />
 
@@ -107,7 +107,7 @@ export default function LowerThirdTV() {
                 style={{ borderBottomColor: partyColor, zIndex: 10 - i }}
               >
                 {/* PROGRESS BAR - Matches exact Party Color */}
-                <div className="absolute top-0 left-0 h-full animate-progress z-0"
+                <div className="absolute top-0 left-0 h-full animate-progress z-0 opacity-40"
                    style={{ backgroundColor: partyColor, "--target-width": `${calcPct}%` } as any} />
 
                 <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
@@ -117,23 +117,23 @@ export default function LowerThirdTV() {
 
                 <div className="relative z-10 flex w-full h-full items-center overflow-visible content-fade px-2" key={`candidate-content-${city}-${i}`}>
                   
-                  {/* PHOTO */}
-                  <div className={`${isMale ? 'w-[85px]' : 'w-[105px]'} h-full flex items-end shrink-0 z-0 relative overflow-visible mr-2`}>
+                  {/* PHOTO - Slightly larger width since we have more room */}
+                  <div className={`${isMale ? 'w-[75px]' : 'w-[95px]'} h-full flex items-end shrink-0 z-0 relative overflow-visible mr-2`}>
                     <img
                       src={`/candidates/${imageName}.png?t=${Date.now()}`}
-                      className="h-full w-auto object-contain object-bottom drop-shadow-[0_5px_15px_rgba(0,0,0,1)] scale-110 origin-bottom"
+                      className="h-[135%] w-auto object-contain object-bottom drop-shadow-[0_5px_15px_rgba(0,0,0,1)] scale-110 origin-bottom"
                       alt={safeName}
-                      onError={(e) => { e.currentTarget.src = "/candidates/placeholder.jpg"; }}
+                      onError={(e) => { e.currentTarget.src = "/candidates/default.png"; }}
                     />
                   </div>
 
-                  {/* NAME - Dynamic Line Splitting for Male City Only */}
+                  {/* NAME */}
                   <div className="flex flex-col justify-center z-30 min-w-0 pr-1 flex-1">
-                    <h2 className={`text-white font-black italic uppercase tracking-tighter leading-[0.8] ${isMale ? 'text-[15px]' : 'text-[22px] whitespace-nowrap truncate'}`}>
+                    <h2 className={`text-white font-black italic uppercase tracking-tighter leading-[0.8] ${isMale ? 'text-[20px]' : 'text-[22px] whitespace-nowrap truncate'}`}>
                       {isMale && nameParts.length > 1 ? (
                         <>
                           <span>{nameParts[0]}</span> <br/>
-                          <span className="text-[16px] opacity-75 font-bold leading-none">
+                          <span className="text-[18px] opacity-75 font-bold leading-none">
                             {nameParts.slice(1).join(' ')}
                           </span>
                         </>
@@ -141,7 +141,7 @@ export default function LowerThirdTV() {
                         <span>{safeName}</span>
                       )}
                     </h2>
-                    <p className={`${isMale ? 'text-[12px]' : 'text-[18px]'} font-black uppercase text-white/50 mt-1`}>
+                    <p className={`${isMale ? 'text-[9px]' : 'text-[11px]'} font-black uppercase text-white/50 mt-1`}>
                         {can.party}
                     </p>
                   </div>
@@ -149,14 +149,14 @@ export default function LowerThirdTV() {
                   {/* DATA BLOCK */}
                   <div className="flex flex-col justify-center items-end z-30 text-white pr-1 ml-auto shrink-0">
                     <p className={`font-black italic tracking-tighter tabular-nums leading-none text-white 
-                      ${isMale ? 'text-[28px]' : 'text-[42px]'}`}>
+                      ${isMale ? 'text-[30px]' : 'text-[44px]'}`}>
                         <RollingNumber value={calcPct} decimals={1} />
-                        <span className={`${isMale ? 'text-[9px]' : 'text-[13px]'} ml-0.5 opacity-60`}>%</span>
+                        <span className={`${isMale ? 'text-[10px]' : 'text-[14px]'} ml-0.5 opacity-60`}>%</span>
                     </p>
                     <div className="flex items-center gap-1 mt-0.5">
-                      <span className={`${isMale ? 'text-[7px]' : 'text-[8px]'} font-bold uppercase opacity-40 tracking-widest`}>VOTES</span>
+                      <span className={`${isMale ? 'text-[7px]' : 'text-[9px]'} font-bold uppercase opacity-40 tracking-widest`}>VOTES</span>
                       <span className={`font-black tabular-nums leading-none text-white/90 
-                        ${isMale ? 'text-[15px]' : 'text-[20px]'}`}>
+                        ${isMale ? 'text-[17px]' : 'text-[22px]'}`}>
                         <RollingNumber value={currentVotes} />
                       </span>
                     </div>
