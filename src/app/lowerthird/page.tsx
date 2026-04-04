@@ -80,8 +80,8 @@ export default function LowerThirdTV() {
             <p className="text-[9px] font-black text-zinc-400 uppercase tracking-[0.2em] mb-0.5">MAYOR RACE</p>
             <h1 className="text-[#84754D] text-xl font-black italic uppercase tracking-tighter mb-1 leading-none">{city}</h1>
             <div className="flex justify-between items-end mb-1">
-              <span className="text-[12px] font-black text-zinc-800 italic">{boxesReported} <span className="text-zinc-400 not-italic">/ {totalBoxes}</span></span>
-              <span className="text-[8px] font-bold text-zinc-400 uppercase">Boxes</span>
+              <span className="text-[18px] font-black text-zinc-800 italic">{boxesReported} <span className="text-zinc-400 text-[14px] not-italic">/ {totalBoxes}</span></span>
+              <span className="text-[16px] font-bold text-zinc-400 uppercase">Boxes</span>
             </div>
             <div className="w-full bg-zinc-100 h-1.5 rounded-full overflow-hidden border border-zinc-200">
               <div className="bg-[#84754D] h-full transition-all duration-1000 ease-out" style={{ width: `${boxProgress}%` }} />
