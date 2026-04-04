@@ -21,9 +21,13 @@ export default function Home() {
           <h2 className="text-2xl font-black text-[#A020F0] mb-2 uppercase">TV Output</h2>
           <p className="text-zinc-400 text-sm">Full-screen 16:9 broadcast graphics for Mayoral results.</p>
         </Link>
-        <Link href="/mayor" className="group p-8 bg-zinc-900 border-2 border-zinc-800 rounded-3xl hover:border-[#f05420] transition-all">
+        <Link href="/lowerthird" className="group p-8 bg-zinc-900 border-2 border-zinc-800 rounded-3xl hover:border-[#f05420] transition-all">
           <h2 className="text-2xl font-black text-[#f05420] mb-2 uppercase">TV Output - LowerThird</h2>
           <p className="text-zinc-400 text-sm">Lowerthird broadcast graphics for Mayoral results.</p>
+        </Link>
+        <Link href="/referendum-bug" className="group p-8 bg-zinc-900 border-2 border-zinc-800 rounded-3xl hover:border-[#20f038] transition-all">
+          <h2 className="text-2xl font-black text-[#43f020] mb-2 uppercase">TV Output - Refrendum</h2>
+          <p className="text-zinc-400 text-sm">Referendum broadcast graphics</p>
         </Link>
       </div>
       <div className="mt-12 text-[10px] text-zinc-700 font-mono uppercase">
