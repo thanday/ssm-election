@@ -69,8 +69,8 @@ export default function LowerThirdTV() {
       `}} />
 
       <div 
-        className="absolute bottom-[10%] left-[80px] flex items-end h-[100px] gap-0 overflow-visible edge-guard bg-black" 
-        style={{ width: '1650px' }} 
+        className="absolute bottom-[10%] left-[110px] flex items-end h-[100px] gap-0 overflow-visible edge-guard bg-black" 
+        style={{ width: '1630px' }} 
       >
         <div className="absolute inset-0 bg-black z-0" />
 
