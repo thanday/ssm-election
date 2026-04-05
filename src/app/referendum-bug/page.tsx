@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useElectionData } from "../../hooks/useElectionData";
 
 const SSTV_GOLD = "#84754D";
+const TOTAL_ELIGIBLE_VOTERS = 294876; // Updated to your provided figure
 
 function RollingNumber({ value, decimals = 0 }: { value: string | number | undefined, decimals?: number }) {
   const [displayValue, setDisplayValue] = useState(0);
@@ -41,6 +42,11 @@ export default function ReferendumBug() {
   const totalVotes = (Number(data.yes) || 0) + (Number(data.no) || 0);
   const yesPct = totalVotes > 0 ? (data.yes / totalVotes) * 100 : 0;
   const noPct = totalVotes > 0 ? (data.no / totalVotes) * 100 : 0;
+
+  // DYNAMIC TURNOUT CALCULATION
+  const dynamicTurnout = TOTAL_ELIGIBLE_VOTERS > 0 
+    ? (totalVotes / TOTAL_ELIGIBLE_VOTERS) * 100 
+    : 0;
 
   return (
     <div className="h-screen w-screen bg-transparent p-12 relative overflow-hidden font-sans select-none">
@@ -98,7 +104,7 @@ export default function ReferendumBug() {
                         <RollingNumber value={yesPct} decimals={1} /><span className="text-xl ml-0.5 opacity-30">%</span>
                     </div>
                     <div className="mt-2 flex flex-col">
-                        <span className="text-zinc-600 text-[12px] font-black uppercase tracking-widest mb-0.5 whitespace-nowrap">Total Votes</span>
+                        <span className="text-zinc-600 text-[10px] font-black uppercase tracking-widest mb-0.5 whitespace-nowrap">Total Votes</span>
                         <span className="text-zinc-400 text-xl font-bold tabular-nums leading-none">
                             <RollingNumber value={data.yes} />
                         </span>
@@ -111,7 +117,7 @@ export default function ReferendumBug() {
                         <RollingNumber value={noPct} decimals={1} /><span className="text-xl ml-0.5 opacity-30">%</span>
                     </div>
                     <div className="mt-2 flex flex-col items-end">
-                        <span className="text-zinc-600 text-[12px] font-black uppercase tracking-widest mb-0.5 whitespace-nowrap">Total Votes</span>
+                        <span className="text-zinc-600 text-[10px] font-black uppercase tracking-widest mb-0.5 whitespace-nowrap">Total Votes</span>
                         <span className="text-zinc-400 text-xl font-bold tabular-nums leading-none">
                             <RollingNumber value={data.no} />
                         </span>
@@ -123,13 +129,13 @@ export default function ReferendumBug() {
         {/* 3. FOOTER */}
         <div className="bg-[#050505] p-5 flex justify-between items-center border-x-2 border-zinc-900 border-t border-zinc-800 relative z-10">
             <div className="flex flex-col">
-                <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest leading-none mb-1">Turnout</span>
+                <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest leading-none mb-1">Voter Turnout</span>
                 <span className="text-emerald-400 font-black text-3xl italic tracking-tighter leading-none">
-                    <RollingNumber value={data.turnout} decimals={2} />%
+                    <RollingNumber value={dynamicTurnout} decimals={2} />%
                 </span>
             </div>
             <div className="text-right border-l border-zinc-800 pl-5">
-                <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest leading-none mb-1">Boxes</span>
+                <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest leading-none mb-1">Boxes Reported</span>
                 <span className="text-white font-black text-[28px] italic tracking-tighter leading-none block">
                     {data.boxesReported} <span className="text-[#84754D] not-italic text-[16px]">/ {data.totalBoxes}</span>
                 </span>
